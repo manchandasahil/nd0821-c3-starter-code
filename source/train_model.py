@@ -9,7 +9,8 @@ from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
-from joblib import dump
+from joblib import dump, load
+from .model import compute_model_metrics
 
 # Add the necessary imports for the starter code.
 
@@ -19,7 +20,7 @@ if not os.path.isdir('model/'):
 data = pd.read_csv("data/cleaned/census_cleaned.csv")
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data, test_size=0.20)
+train, test = train_test_split(data, test_size=0.25)
 
 cat_features = [
     "workclass",
@@ -145,7 +146,7 @@ def train_test_model():
     Execute model training
     """
     df = pd.read_csv("data/cleaned/census_cleaned.csv")
-    train, _ = train_test_split(df, test_size=0.20)
+    train, _ = train_test_split(df, test_size=0.25)
 
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features,
@@ -156,3 +157,29 @@ def train_test_model():
     dump(trained_model, "model/model.joblib")
     dump(encoder, "model/encoder.joblib")
     dump(lb, "model/lb.joblib")
+
+def evaluate():
+    if data is None:
+        df = pd.read_csv("data/cleaned/census_cleaned.csv")
+    else:
+        df = data
+    _, test = train_test_split(df, test_size=0.25)
+
+    model = load("model/model.joblib")
+    encoder = load("model/encoder.joblib")
+    lb = load("model/lb.joblib")
+    output_slices = []
+    for _categories in cat_features:
+        for _classes in test[_categories].unique():
+            df_temp = test[test[_categories] == _classes]
+            X_test, y_test, _, _ = process_data(
+                df_temp,
+                categorical_features=cat_features,
+                label="salary", encoder=encoder, lb=lb, training=False)
+            y_preds = model.predict(X_test)
+            precision, recall, fbeta = compute_model_metrics(y_test,y_preds)
+            results = f"Cat: {_categories}, Precision: {precision}, recall: {recall}, fbeta: {fbeta}\n"
+            logging.info(results)
+            output_slices.append(results)
+    with open('model/slice_output.txt', 'w') as out:
+        out.writelines(output_slices)

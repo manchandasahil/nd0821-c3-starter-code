@@ -13,17 +13,17 @@ def execute(args):
     """
     logging.basicConfig(level=logging.INFO)
 
-    if args.action == "all" or args.action == "basic_cleaning":
-        logging.info("Basic cleaning procedure started")
-        source.clean_data.clean_data()
+    # if args.action == "all" or args.action == "basic_cleaning":
+    #     logging.info("Basic cleaning procedure started")
+    #     source.clean_data.clean_data()
 
-    if args.action == "all" or args.action == "train_test_model":
-        logging.info("Train/Test model procedure started")
-        source.train_model.train_test_model()
+    # if args.action == "all" or args.action == "train_test_model":
+    #     logging.info("Train/Test model procedure started")
+    #     source.train_model.train_test_model()
 
-    # if args.action == "all" or args.action == "check_score":
-    #     logging.info("Score check procedure started")
-    #     source.check_score.check_score()
+    if args.action == "all" or args.action == "check_score":
+        logging.info("Score check procedure started")
+        source.train_model.evaluate()
 
 
 if __name__ == "__main__":
