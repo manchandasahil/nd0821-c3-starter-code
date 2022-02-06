@@ -31,4 +31,4 @@ def clean_data():
     """
     df = pd.read_csv(data_path, skipinitialspace=True)
     df = pre_process_dataset(df)
-    df.to_csv(data_clean_path + "census.csv", index=False)
+    df.to_csv(data_clean_path + "census_cleaned.csv", index=False)
