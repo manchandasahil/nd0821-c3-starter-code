@@ -1,5 +1,5 @@
 import os
-import yaml
+# import yaml
 import numpy as np
 from fastapi import FastAPI
 from schema import ModelInput
@@ -17,8 +17,8 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
         exit("dvc pull failed")
     os.system("rm -r .dvc .apt/usr/lib/dvc")
 
-with open('config.yml') as f:
-    config = yaml.safe_load(f)
+# with open('config.yml') as f:
+#     config = yaml.safe_load(f)
 
 app = FastAPI()
 
