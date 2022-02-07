@@ -20,7 +20,7 @@ if not os.path.isdir('model/'):
 data = pd.read_csv("data/cleaned/census_cleaned.csv")
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data, test_size=0.25)
+train, test = train_test_split(data, test_size=0.20)
 
 cat_features = [
     "workclass",
@@ -146,7 +146,7 @@ def train_test_model():
     Execute model training
     """
     df = pd.read_csv("data/cleaned/census_cleaned.csv")
-    train, _ = train_test_split(df, test_size=0.25)
+    train, _ = train_test_split(df, test_size=0.20)
 
     X_train, y_train, encoder, lb = process_data(
         train, categorical_features=cat_features,
@@ -163,7 +163,7 @@ def evaluate():
         df = pd.read_csv("data/cleaned/census_cleaned.csv")
     else:
         df = data
-    _, test = train_test_split(df, test_size=0.25)
+    _, test = train_test_split(df, test_size=0.20)
 
     model = load("model/model.joblib")
     encoder = load("model/encoder.joblib")

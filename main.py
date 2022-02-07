@@ -21,9 +21,9 @@ def execute(args):
         logging.info("Train/Test model procedure started")
         source.train_model.train_test_model()
 
-    # if args.action == "all" or args.action == "check_score":
-    #     logging.info("Score check procedure started")
-    #     source.train_model.evaluate()
+    if args.action == "all" or args.action == "check_score":
+        logging.info("Score check procedure started")
+        source.train_model.evaluate()
 
 
 if __name__ == "__main__":

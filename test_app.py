@@ -24,7 +24,7 @@ def test_invalid_post():
     })
     assert r.status_code == 422
 
-def test_normal():
+def test_normal_below():
     r = client.post("/", json={
             'age': 32,
             'workclass': 'Private',
@@ -41,6 +41,24 @@ def test_normal():
     print(r)
     assert r.status_code == 200
     assert r.json() == {"prediction": "<=50K"}
+
+def test_normal_above():
+    r = client.post("/", json={
+            'age': 32,
+            'workclass': 'State-gov',
+            'fnlgt': 141297,
+            'education': 'HS-grad',
+            'marital_status': 'Married-civ-spouse',
+            'occupation': 'Prof-specialty',
+            'relationship': 'Husband',
+            'race': 'Asian-Pac-Islander',
+            'sex': 'Male',
+            'hoursPerWeek': 40,
+            'nativeCountry': 'India'
+    })
+    print(r)
+    assert r.status_code == 200
+    assert r.json() == {"prediction": ">50K"}
 
 def test_wrong_url():
     r = client.get("/infer_on_whim")
