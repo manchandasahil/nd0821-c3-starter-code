@@ -24,19 +24,19 @@ def test_invalid_post():
     })
     assert r.status_code == 422
 
+# 28,Private,Bachelors,Married-civ-spouse,Prof-specialty,Wife,Black,Female,40,Cuba,<=50K
 def test_normal_below():
     r = client.post("/", json={
-            'age': 32,
-            'workclass': 'Private',
-            'fnlgt': 149184,
-            'education': 'HS-grad',
-            'marital_status': 'Never-married',
-            'occupation': 'Prof-specialty',
-            'relationship': 'Not-in-family',
-            'race': 'White',
-            'sex': 'Male',
-            'hoursPerWeek': 60,
-            'nativeCountry': 'United-States'
+        "age": 28,
+        "workclass": "Private",
+        "education": "Bachelors",
+        "maritalStatus": "Married-civ-spouse",
+        "occupation": "Prof-specialty",
+        "relationship": "Wife",
+        "race": "Black",
+        "sex": "Female",
+        "hoursPerWeek": 40,
+        "nativeCountry": "Cuba"
     })
     print(r)
     assert r.status_code == 200
@@ -44,17 +44,16 @@ def test_normal_below():
 
 def test_normal_above():
     r = client.post("/", json={
-            'age': 32,
-            'workclass': 'State-gov',
-            'fnlgt': 141297,
-            'education': 'HS-grad',
-            'marital_status': 'Married-civ-spouse',
-            'occupation': 'Prof-specialty',
-            'relationship': 'Husband',
-            'race': 'Asian-Pac-Islander',
-            'sex': 'Male',
-            'hoursPerWeek': 40,
-            'nativeCountry': 'India'
+        "age": 32,
+        "workclass": "Private",
+        "education": "Some-college",
+        "maritalStatus": "Married-civ-spouse",
+        "occupation": "Exec-managerial",
+        "relationship": "Husband",
+        "race": "White",
+        "sex": "Male",
+        "hoursPerWeek": 60,
+        "nativeCountry": "United-States"
     })
     print(r)
     assert r.status_code == 200

@@ -37,7 +37,7 @@ async def inference(input_data: ModelInput):
                      input_data.age,
                      input_data.workclass,
                      input_data.education,
-                     input_data.marital_status,
+                     input_data.maritalStatus,
                      input_data.occupation,
                      input_data.relationship,
                      input_data.race,

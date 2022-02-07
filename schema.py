@@ -7,13 +7,12 @@ class ModelInput(BaseModel):
     workclass: Literal[
         'State-gov', 'Self-emp-not-inc', 'Private', 'Federal-gov',
         'Local-gov', 'Self-emp-inc', 'Without-pay']
-    fnlgt: int
     education: Literal[
         'Bachelors', 'HS-grad', '11th', 'Masters', '9th',
         'Some-college',
         'Assoc-acdm', '7th-8th', 'Doctorate', 'Assoc-voc', 'Prof-school',
         '5th-6th', '10th', 'Preschool', '12th', '1st-4th']
-    marital_status: Literal[
+    maritalStatus: Literal[
         'Never-married', 'Married-civ-spouse', 'Divorced',
         'Married-spouse-absent', 'Separated', 'Married-AF-spouse',
         'Widowed']

@@ -6,7 +6,7 @@ import logging
 from numpy import mean, std
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from joblib import dump, load
@@ -127,7 +127,7 @@ def train_model(X_train, y_train):
         Trained machine learning model.
     """
     cv = KFold(n_splits=10, shuffle=True, random_state=1)
-    model = GradientBoostingClassifier(n_estimators=100)
+    model = RandomForestClassifier(n_estimators=100)
     model.fit(X_train, y_train)
     scores = cross_val_score(model, X_train, y_train, scoring='accuracy',
                              cv=cv, n_jobs=-1)
