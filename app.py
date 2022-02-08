@@ -6,7 +6,7 @@ from schema import ModelInput
 from pandas import DataFrame
 from joblib import load
 # from source.train_model import infer
-from source.train_model import process_data, cat_features
+# from source.train_model import process_data, cat_features
 
 
 
