@@ -17,7 +17,7 @@ from .model import compute_model_metrics
 if not os.path.isdir('model/'):
     os.mkdir('model/')
 # Add code to load in the data.
-data = pd.read_csv("data/cleaned/census_cleaned.csv")
+# data = pd.read_csv("data/cleaned/census_cleaned.csv")
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
 train, test = train_test_split(data, test_size=0.20)
