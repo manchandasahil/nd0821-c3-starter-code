@@ -159,15 +159,13 @@ def train_test_model():
     dump(lb, "model/lb.joblib")
 
 def evaluate():
-    if data is None:
-        df = pd.read_csv("data/cleaned/census_cleaned.csv")
-    else:
-        df = data
+    df = pd.read_csv("data/cleaned/census_cleaned.csv")
     _, test = train_test_split(df, test_size=0.20)
 
     model = load("model/model.joblib")
     encoder = load("model/encoder.joblib")
     lb = load("model/lb.joblib")
+
     output_slices = []
     for _categories in cat_features:
         for _classes in test[_categories].unique():
@@ -183,3 +181,22 @@ def evaluate():
             output_slices.append(results)
     with open('model/slice_output.txt', 'w') as out:
         out.writelines(output_slices)
+
+def evaluate_full():
+    """
+    evaluate on the entire test test
+    """
+    model = load("model/model.joblib")
+    encoder = load("model/encoder.joblib")
+    lb = load("model/lb.joblib")
+
+    df = pd.read_csv("data/cleaned/census_cleaned.csv")
+    _, test = train_test_split(df, test_size=0.20)
+    X_test, y_test, _, _ = process_data(
+                test,
+                categorical_features=cat_features,
+                label="salary", encoder=encoder, lb=lb, training=False)
+    y_preds = model.predict(X_test)
+    precision, recall, fbeta = compute_model_metrics(y_test,y_preds)
+    results = f"Full results: Precision: {precision}, recall: {recall}, fbeta: {fbeta}\n"
+    logging.info(results)

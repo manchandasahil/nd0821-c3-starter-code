@@ -21,4 +21,5 @@ Taining Accuracy: 0.83 <br>
 This model has data points related to origin, gender and race of an individual. Investigation is needed before using it. It could be biased on these counts.
 
 ## Caveats and Recommendations
-None
+The model could be overfitting in case of certain 'country of origin' as some values have very less
+examples of data it was trained on.

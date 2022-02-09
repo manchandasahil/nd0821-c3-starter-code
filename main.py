@@ -23,7 +23,9 @@ def execute(args):
 
     if args.action == "all" or args.action == "check_score":
         logging.info("Score check procedure started")
+        source.train_model.evaluate_full()
         source.train_model.evaluate()
+        
 
 
 if __name__ == "__main__":
