@@ -34,7 +34,7 @@ jobs:
       - name: Pull data from DVC
         run: |
           dvc remote add -df s3-bucket s3://udacitycoursebucket
-          dvc pull data -R
+          dvc pull
       - name: Lint with flake8
         run: |
           # stop the build if there are Python syntax errors or undefined names
