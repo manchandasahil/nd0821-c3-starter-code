@@ -200,3 +200,4 @@ def evaluate_full():
     precision, recall, fbeta = compute_model_metrics(y_test,y_preds)
     results = f"Full results: Precision: {precision}, recall: {recall}, fbeta: {fbeta}\n"
     logging.info(results)
+    return results

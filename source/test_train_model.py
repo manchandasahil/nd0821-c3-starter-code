@@ -12,9 +12,13 @@ def test_process_data():
 
     assert X.shape[0] == df.shape[0]
 
-def test_evaluate():
+def test_evaluate_slices():
     """
     test the evaluate function
     """
     evaluate()
     assert os.path.isfile("./model/slice_output.txt")
+
+def test_evaluate_full():
+    results = evaluate_full()
+    assert len(results) > 0
